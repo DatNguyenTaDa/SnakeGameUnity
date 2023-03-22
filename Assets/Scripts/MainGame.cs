@@ -6,8 +6,6 @@ using UnityEngine;
 public class MainGame : MonoBehaviour
 {
     [SerializeField] private Snake snake;
-    [SerializeField] private AudioSource src;
-    [SerializeField] private AudioClip src1, src2;
     private static MainGame instance;
     private static int score;
     private static int highScore;
@@ -16,20 +14,28 @@ public class MainGame : MonoBehaviour
 
     private void Awake()
     {
+        
         instance = this;
     }
     private void Start()
     {
         Debug.Log("Game Start");
-        src.clip = src1;
-        src.Play();
         score= 0;
-        levelGrid = new LevelSnake(24, 18);
+        Audio.instance.Theme();
+        highScore = PlayerPrefs.GetInt("highScore", 0);
+        levelGrid = new LevelSnake(19, 15);
 
         snake.Setup(levelGrid);
         levelGrid.Setup(snake);
     }
-
+    private void Update()
+    {
+        if(OnOffSound.soundTheme == 0)
+        {
+            Audio.instance.Mute();
+        }
+        else Audio.instance.DontMute();
+    }
     public static int GetScore()
     {
         return score;
@@ -40,8 +46,9 @@ public class MainGame : MonoBehaviour
     }
     public static int GetHighScore()
     {
-        if(score>highScore)
-            highScore = score;
-        return highScore;
+        if (score > highScore)
+            PlayerPrefs.SetInt("highScore", score);
+
+        return PlayerPrefs.GetInt("highScore", score);
     }
 }

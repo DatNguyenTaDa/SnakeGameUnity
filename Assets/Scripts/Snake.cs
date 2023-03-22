@@ -29,9 +29,7 @@ public class Snake : MonoBehaviour
     private int snakeBodySize;
     private List<SnakeMovePosition> snakeMovePositionList;
     private List<SnakeBodyPart> snakeBodyPartList;
-    [SerializeField]private float speed = 0.5f;
-    [SerializeField] private AudioSource audio;
-
+    private float speed;
     public void Setup(LevelSnake levelGrid)
     {
         this.levelSnake = levelGrid;
@@ -39,8 +37,22 @@ public class Snake : MonoBehaviour
 
     private void Awake()
     {
+
+        if (Menu.level == 1)
+        {
+            speed = 1f;
+        }
+        else if (Menu.level == 2)
+        {
+            speed = 2f;
+        }
+        else if (Menu.level == 3)
+        {
+            speed = 4f;
+        }
+        else speed = 1f;
         snakePosition = new Vector2Int(10, 10);
-        snakeMoveTimerMax = .2f * (1/speed);
+        snakeMoveTimerMax = .2f * (1 / speed);
         snakeMoveTimer = snakeMoveTimerMax;
         snakeMoveDirection = Direction.Zero;
 
@@ -49,7 +61,6 @@ public class Snake : MonoBehaviour
 
         snakeBodyPartList = new List<SnakeBodyPart>();
         isAlive = IsAlive.Alive;
-
     }
 
     private void Update()
@@ -138,7 +149,10 @@ public class Snake : MonoBehaviour
                 // Snake ate food, grow body
                 snakeBodySize++;
                 CreateSnakeBodyPart();
-                audio.Play();
+                if(OnOffSound.soundBite == 1)
+                {
+                    Audio.instance.Bite();
+                }
             }
 
             if (snakeMovePositionList.Count >= snakeBodySize + 1)
