@@ -34,7 +34,7 @@ public class LevelSnake : MonoBehaviour
     {
         do
         {
-            foodGridPosition = new Vector2Int(Random.Range(1, width), Random.Range(4, height));
+            foodGridPosition = new Vector2Int(Random.Range(-width, width), Random.Range(-height, height));
         } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
 
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));

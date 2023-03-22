@@ -23,7 +23,7 @@ public class MainGame : MonoBehaviour
         score= 0;
         Audio.instance.Theme();
         highScore = PlayerPrefs.GetInt("highScore", 0);
-        levelGrid = new LevelSnake(19, 15);
+        levelGrid = new LevelSnake(9, 6);
 
         snake.Setup(levelGrid);
         levelGrid.Setup(snake);

@@ -44,14 +44,14 @@ public class Snake : MonoBehaviour
         }
         else if (Menu.level == 2)
         {
-            speed = 2f;
+            speed = 1.5f;
         }
         else if (Menu.level == 3)
         {
-            speed = 4f;
+            speed = 2f;
         }
         else speed = 1f;
-        snakePosition = new Vector2Int(10, 10);
+        snakePosition = new Vector2Int(0, 0);
         snakeMoveTimerMax = .2f * (1 / speed);
         snakeMoveTimer = snakeMoveTimerMax;
         snakeMoveDirection = Direction.Zero;
