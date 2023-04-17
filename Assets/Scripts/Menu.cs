@@ -24,16 +24,21 @@ public class Menu : MonoBehaviour
     {
         level = 1;
         SceneManager.LoadScene(1);
+        Time.timeScale= 1;
     }
     public void Normal()
     {
         level = 2;
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+
     }
     public void Hard()
     {
         level = 3;
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+
     }
 
 }

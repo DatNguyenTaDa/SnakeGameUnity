@@ -22,7 +22,7 @@ public class MainGame : MonoBehaviour
         Debug.Log("Game Start");
         score= 0;
         Audio.instance.Theme();
-        highScore = PlayerPrefs.GetInt("highScore", 0);
+        highScore = PlayerPrefs.GetInt("snakeHighScore", 0);
         levelGrid = new LevelSnake(9, 6);
 
         snake.Setup(levelGrid);
@@ -30,7 +30,7 @@ public class MainGame : MonoBehaviour
     }
     private void Update()
     {
-        if(OnOffSound.soundTheme == 0)
+        if(View.soundTheme == 0)
         {
             Audio.instance.Mute();
         }
@@ -47,8 +47,8 @@ public class MainGame : MonoBehaviour
     public static int GetHighScore()
     {
         if (score > highScore)
-            PlayerPrefs.SetInt("highScore", score);
+            PlayerPrefs.SetInt("snakeHighScore", score);
 
-        return PlayerPrefs.GetInt("highScore", score);
+        return PlayerPrefs.GetInt("snakeHighScore", score);
     }
 }

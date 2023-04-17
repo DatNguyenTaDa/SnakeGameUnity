@@ -38,6 +38,7 @@ public class LevelSnake : MonoBehaviour
         } while (snake.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
 
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
+        foodGameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodSprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y);
     }
@@ -59,6 +60,26 @@ public class LevelSnake : MonoBehaviour
         {
             return false;
         }
+    }
+    public Vector2Int ValidSnakePosition(Vector2Int snakePosition)
+    {
+        if (snakePosition.x < -width)
+        {
+            snakePosition.x = width;
+        }
+        if(snakePosition.x > width)
+        {
+            snakePosition.x = -width;
+        }
+        if(snakePosition.y < -height)
+        {
+            snakePosition.y = height;
+        }
+        if(snakePosition.y > height)
+        {
+            snakePosition.y = -height;
+        }
+        return snakePosition;
     }
 
 }

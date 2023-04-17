@@ -60,7 +60,11 @@ public class Snake : MonoBehaviour
         snakeBodySize = 0;
 
         snakeBodyPartList = new List<SnakeBodyPart>();
+    }
+    private void Start()
+    {
         isAlive = IsAlive.Alive;
+
     }
 
     private void Update()
@@ -143,13 +147,15 @@ public class Snake : MonoBehaviour
             }
             snakePosition += snakeMoveDirectionVector;
 
+            snakePosition = levelSnake.ValidSnakePosition(snakePosition);
+
             bool snakeAteFood = levelSnake.TrySnakeEatFood(snakePosition);
             if (snakeAteFood)
             {
                 // Snake ate food, grow body
                 snakeBodySize++;
                 CreateSnakeBodyPart();
-                if(OnOffSound.soundBite == 1)
+                if(View.soundBite == 1)
                 {
                     Audio.instance.Bite();
                 }
@@ -297,11 +303,11 @@ public class Snake : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Wall")
-        {
-            isAlive = IsAlive.Dead;
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.tag == "Wall")
+    //    {
+    //        isAlive = IsAlive.Dead;
+    //    }
+    //}
 }

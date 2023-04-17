@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class OnOffSound : MonoBehaviour
+public class View : MonoBehaviour
 {
     public static int soundTheme = 1;
     public static int soundBite = 1;
@@ -62,5 +63,9 @@ public class OnOffSound : MonoBehaviour
     {
         panel.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void GoHome()
+    {
+        SceneManager.LoadScene(0);
     }
 }
